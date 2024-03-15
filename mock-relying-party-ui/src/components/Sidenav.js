@@ -464,9 +464,9 @@ export default function Sidenav({
           <div className="p-4 ltr:sm:ml-64 rtl:sm:mr-64 overflow-auto bg-gray-50 font-sans bg-none">
             <div className="flex flex-wrap justify-between items-center px-4 md:px-6 py-2.5">
               <a className="flex-1 items-center truncate">
-                <span className="self-center text-2xl font-semibold whitespace-nowrap">
+               {userInfo?.name && <span className="self-center text-2xl font-semibold whitespace-nowrap">
                   {t("welcome")}, {userInfo?.name}
-                </span>
+                </span>}
                 <p className="text-sm text-gray-500 truncate bg-gray-50 font-sans">
                   {t("message_notification")}
                 </p>
@@ -513,7 +513,7 @@ export default function Sidenav({
                   {isOpen && (
                     <div className="origin-top-left absolute ltr:right-0 rtl:left-0 max-w-xs shadow-lg">
                       <div className="flex flex-col px-1 py-1 rounded-md bg-white shadow-xs mt-2">
-                                                <a className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" title={emailAddress}>
+                            {emailAddress && <a className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" title={emailAddress}>
                           {t("email")}:&nbsp;
                           <span className="truncate">
                             {emailAddress?.split("@")[0]}
@@ -522,19 +522,19 @@ export default function Sidenav({
                           <span className="truncate">
                             {emailAddress?.split("@")[1]}
                           </span>
-                        </a>
-                        <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
+                        </a>}
+                       { userInfo?.birthdate && <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                           {t("dob")}: {userInfo?.birthdate}
-                        </a>
-                        <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
+                        </a>}
+                        {userInfo?.gender && <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                           {t("gender")}: {userInfo?.gender}
-                        </a>
-                        <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
+                        </a>}
+                       {userInfo?.phone_number && <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                           {t("mobile_no")}: {userInfo?.phone_number}
-                        </a>
-                        <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
+                        </a>}
+                       {address && <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                           {t("address")}: {address}
-                        </a>
+                        </a>}
                         <button
                           className="w-full ltr:text-left rtl:text-right block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                           onClick={(e) => {
