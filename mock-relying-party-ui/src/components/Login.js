@@ -48,7 +48,7 @@ export default function Login({ i18nKeyPrefix = "login" }) {
       prompt: clientDetails.prompt,
       max_age: clientDetails.max_age,
       ui_locales: i18n.language,
-      claims: clientDetails.userProfileClaims
+      claims: JSON.parse(decodeURI(clientDetails.userProfileClaims))
     };
 
     window.SignInWithEsignetButton?.init({
