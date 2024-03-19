@@ -36,7 +36,7 @@ const redirect_uri_registration = checkEmptyNullValue(
 const acr_values = window._env_.ACRS;
 const userProfileClaims = checkEmptyNullValue(
   window._env_.CLAIMS_USER_PROFILE,
-  "%7B%22userinfo%22:%7B%22name%22:%7B%22essential%22:true%7D,%22phone_number%22:%7B%22essential%22:true%7D,%22email%22:%7B%22essential%22:true%7D,%22picture%22:%7B%22essential%22:false%7D,%22gender%22:%7B%22essential%22:false%7D,%22birthdate%22:%7B%22essential%22:false%7D,%22address%22:%7B%22essential%22:false%7D%7D,%22id_token%22:%7B%7D%7D"
+  "%7B%22userinfo%22:%7B%22name%22:%7B%22essential%22:true%7D,%22phone_number%22:%7B%22essential%22:true%7D,%22email%22:%7B%22essential%22:false%7D,%22picture%22:%7B%22essential%22:false%7D,%22gender%22:%7B%22essential%22:false%7D,%22birthdate%22:%7B%22essential%22:false%7D,%22address%22:%7B%22essential%22:false%7D%7D,%22id_token%22:%7B%7D%7D"
 );
 const registrationClaims = checkEmptyNullValue(
   window._env_.CLAIMS_REGISTRATION,
@@ -45,14 +45,14 @@ const registrationClaims = checkEmptyNullValue(
 
 const claims = {
   userinfo: {
-    given_name: {
+    name: {
       essential: true,
     },
     phone_number: {
-      essential: false,
+      essential: true,
     },
     email: {
-      essential: true,
+      essential: false,
     },
     picture: {
       essential: false,
