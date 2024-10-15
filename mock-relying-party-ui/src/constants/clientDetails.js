@@ -21,7 +21,7 @@ const grantType = checkEmptyNullValue(
   "authorization_code"
 );
 const maxAge = window._env_.MAX_AGE;
-const claimsLocales = checkEmptyNullValue(window._env_.CLAIMS_LOCALES, "en");
+const claimsLocales = checkEmptyNullValue(window._env_.CLAIMS_LOCALES, "fr");
 const authorizeEndpoint = "/authorize";
 const clientId = window._env_.CLIENT_ID;
 const uibaseUrl = window._env_.ESIGNET_UI_BASE_URL;
