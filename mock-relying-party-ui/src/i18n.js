@@ -14,7 +14,7 @@ i18n
   .init({
     lng: window._env_.DEFAULT_LANG,
     debug: false,
-    fallbackLng: "en", //window["envConfigs"].defaultLang, //default language
+    fallbackLng: "fr", //window["envConfigs"].defaultLang, //default language
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
