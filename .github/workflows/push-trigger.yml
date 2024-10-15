@@ -20,6 +20,7 @@ on:
       - develop
       - MOSIP*
       - release*
+      - civ-wuri*
 
 jobs:
   build-maven-esignet-mock-services:
