@@ -61,14 +61,14 @@
 		<dependency>
 			<groupId>io.mosip.esignet</groupId>
 			<artifactId>esignet-core</artifactId>
-			<version>1.4.1-SNAPSHOT</version>
+			<version>1.5.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>io.mosip.esignet</groupId>
 			<artifactId>esignet-integration-api</artifactId>
-			<version>1.4.1-SNAPSHOT</version>
+			<version>1.5.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
