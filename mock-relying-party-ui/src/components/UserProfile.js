@@ -202,6 +202,18 @@ export default function UserProfile({
                 <div className="flex justify-start">{t("address")}</div>
                 <div className="flex justify-end">{address}</div>
               </div>
+              <div className="px-4 py-3 grid grid-cols-2">
+                <div className="flex justify-start">{t("deceasedDeclarationDate")}</div>
+                <div className="flex justify-end">{deceasedDeclarationDate}</div>
+              </div>
+              <div className="px-4 py-3 grid grid-cols-2">
+                <div className="flex justify-start">{t("declaredAsDeceased")}</div>
+                <div className="flex justify-end">{declaredAsDeceased}</div>
+              </div>
+              <div className="px-4 py-3 grid grid-cols-2">
+                <div className="flex justify-start">{t("typeOfDeath")}</div>
+                <div className="flex justify-end">{typeOfDeath}</div>
+              </div>
             </div>
             <div className="px-4">
               <button

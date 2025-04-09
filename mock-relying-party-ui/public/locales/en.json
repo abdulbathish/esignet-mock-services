@@ -45,7 +45,10 @@
     "birth_date": "Birth Date",
     "address": "Address",
     "show_raw_user_info": "Show raw user info",
-    "hide_raw_user_info": "Hide raw user info"
+    "hide_raw_user_info": "Hide raw user info",
+    "deceasedDeclarationDate": "Deceased declaration date",
+    "declaredAsDeceased": "Declared as deceased",
+    "typeOfDeath": "Type of death"
   },
   "sidenav": {
     "health_portal": "Health Portal",
