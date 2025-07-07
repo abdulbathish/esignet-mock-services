@@ -28,6 +28,7 @@ export default function Sidenav({
   const [address, setAddress] = useState(null);
   const [emailAddress, setEmailAddress] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
+  const [verificationBadge, setVerificationBadge] = useState(null);
   const navigate = useNavigate();
 
   const navigateToLogin = (errorCode, errorDescription) => {
@@ -108,6 +109,7 @@ export default function Sidenav({
       );
       let address = getAddress(userInfo?.address);
       setAddress(address);
+      setVerificationBadge(userInfo?._verificationBadge || null);
       setUserInfo(userInfo);
       setEmailAddress(userInfo?.email_verified ?? userInfo?.email);
       localStorage.setItem(userInfo_keyname, JSON.stringify(userInfo));
@@ -118,6 +120,7 @@ export default function Sidenav({
         let userInf = JSON.parse(localStorage.getItem(userInfo_keyname));
         let address = getAddress(userInf?.address);
         setAddress(address);
+        setVerificationBadge(userInf?._verificationBadge || null);
         setEmailAddress(userInf?.email_verified ?? userInf?.email);
         setUserInfo(userInf);
         setStatus(states.LOADED);
@@ -615,6 +618,15 @@ export default function Sidenav({
                 <p className="text-[#475467] truncate font-normal text-sm" title={userInfo?.email}>
                   {userInfo?.email}
                 </p>
+                {verificationBadge && (
+                  <div className={`text-xs font-medium px-2 py-1 rounded-md mt-1 ${
+                    verificationBadge.status === 'VERIFIED' 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-red-100 text-red-800'
+                  }`}>
+                    {verificationBadge.status === 'VERIFIED' ? '✅ Verified' : '❌ Not Verified'}
+                  </div>
+                )}
               </div>
             </div>
             <img
@@ -664,6 +676,15 @@ export default function Sidenav({
                 <p className="text-sm text-gray-500 truncate bg-gray-50 font-sans">
                   {t("message_notification")}
                 </p>
+                {verificationBadge && (
+                  <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium mt-2 ${
+                    verificationBadge.status === 'VERIFIED' 
+                      ? 'bg-green-100 text-green-800 border border-green-200' 
+                      : 'bg-red-100 text-red-800 border border-red-200'
+                  }`}>
+                    {verificationBadge.message}
+                  </div>
+                )}
               </a>
 
               <div className="md:flex items-center hidden">
@@ -729,6 +750,15 @@ export default function Sidenav({
                         <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                           {t("address")}: {address}
                         </a>
+                        {verificationBadge && (
+                          <div className={`px-4 py-2 text-sm leading-5 font-medium rounded-md mx-2 my-1 ${
+                            verificationBadge.status === 'VERIFIED' 
+                              ? 'bg-green-100 text-green-800 border border-green-200' 
+                              : 'bg-red-100 text-red-800 border border-red-200'
+                          }`}>
+                            {verificationBadge.message}
+                          </div>
+                        )}
                         <button
                           className="w-full ltr:text-left rtl:text-right block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                           onClick={(e) => {
