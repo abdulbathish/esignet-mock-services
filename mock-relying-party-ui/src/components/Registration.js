@@ -275,6 +275,55 @@ export default function Registration({
           )}
         </div>
 
+        <div className="px-4 py-2 flex justify-center">
+          <div className="flex items-center space-x-2">
+            {userInfo?._jwtVerification?.verified ? (
+              <>
+                <svg 
+                  className="w-5 h-5 text-green-500" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M5 13l4 4L19 7" 
+                  />
+                </svg>
+                <span className="text-green-600 text-sm font-medium">
+                  JWT Signature Verified
+                </span>
+              </>
+            ) : (
+              <>
+                <svg 
+                  className="w-5 h-5 text-red-500" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M6 18L18 6M6 6l12 12" 
+                  />
+                </svg>
+                <span className="text-red-600 text-sm font-medium">
+                  JWT Verification Failed
+                </span>
+                {userInfo?._jwtVerification?.error && (
+                  <span className="text-red-500 text-xs" title={userInfo._jwtVerification.error}>
+                    ⚠️
+                  </span>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+
         {status === states.LOADING && (
           <LoadingIndicator size="medium" message={t("loading_msg")} />
         )}

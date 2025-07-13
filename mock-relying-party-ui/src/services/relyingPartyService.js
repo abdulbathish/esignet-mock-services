@@ -10,7 +10,7 @@ const fetchUserInfoEndPoint = "/fetchUserInfo";
  * @param {string} client_id registered client id
  * @param {string} redirect_uri validated redirect_uri
  * @param {string} grant_type grant_type
- * @returns decode/decrypted user information json
+ * @returns decode/decrypted user information json with JWT verification status
  */
 const post_fetchUserInfo = async (
   code,
@@ -30,6 +30,9 @@ const post_fetchUserInfo = async (
       "Content-Type": "application/json",
     },
   });
+  
+  // The response now includes JWT verification status
+  // Structure: { ...userInfo, _jwtVerification: { verified: boolean, error: string|null } }
   return response.data;
 };
 const get_claimProvider = () => {

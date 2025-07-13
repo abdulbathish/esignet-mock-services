@@ -12,7 +12,8 @@ app.get("/", (req, res) => {
 app.post("/fetchUserInfo", async (req, res) => {
   try {
     const tokenResponse = await post_GetToken(req.body);
-    res.send(await get_GetUserInfo(tokenResponse.access_token));
+    const userInfoWithVerification = await get_GetUserInfo(tokenResponse.access_token);
+    res.send(userInfoWithVerification);
   } catch (error) {
     console.log(error)
     res.status(500).send(error);

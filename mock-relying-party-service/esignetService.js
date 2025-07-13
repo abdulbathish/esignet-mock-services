@@ -1,5 +1,6 @@
 const axios = require("axios");
 const jose = require("jose");
+const jwtVerifier = require("./jwtVerifier");
 const { ESIGNET_SERVICE_URL, ESIGNET_AUD_URL, CLIENT_ASSERTION_TYPE, CLIENT_PRIVATE_KEY, USERINFO_RESPONSE_TYPE, JWE_USERINFO_PRIVATE_KEY } = require("./config");
 
 const baseUrl = ESIGNET_SERVICE_URL.trim();
@@ -47,7 +48,7 @@ const post_GetToken = async ({
 /**
  * Triggers /oidc/userinfo API on esignet service to fetch userInformation
  * @param {string} access_token valid access token
- * @returns decrypted/decoded json user information
+ * @returns decrypted/decoded json user information with JWT verification status
  */
 const get_GetUserInfo = async (access_token) => {
   const endpoint = baseUrl + getUserInfoEndPoint;
@@ -57,7 +58,7 @@ const get_GetUserInfo = async (access_token) => {
     },
   });
 
-  return decodeUserInfoResponse(response.data);
+  return await decodeUserInfoResponse(response.data);
 };
 
 /**
@@ -95,11 +96,14 @@ const generateSignedJwt = async (clientId) => {
 /**
  * decrypts and decodes the user information fetched from esignet services
  * @param {string} userInfoResponse JWE encrypted or JWT encoded user information
- * @returns decrypted/decoded json user information
+ * @returns decrypted/decoded json user information with JWT verification status
  */
 const decodeUserInfoResponse = async (userInfoResponse) => {
-
   let response = userInfoResponse;
+  let jwtVerificationStatus = {
+    verified: false,
+    error: null
+  };
 
   if (USERINFO_RESPONSE_TYPE.toLowerCase() === "jwe") {
     var decodeKey = Buffer.from(JWE_USERINFO_PRIVATE_KEY, 'base64')?.toString();
@@ -120,7 +124,25 @@ const decodeUserInfoResponse = async (userInfoResponse) => {
     }
   }
 
-  return await new jose.decodeJwt(response);
+  // Verify JWT signature before decoding
+  const jwtVerificationResult = await jwtVerifier.verifyUserInfoJwt(response);
+  
+  if (jwtVerificationResult.error) {
+    jwtVerificationStatus.verified = false;
+    jwtVerificationStatus.error = jwtVerificationResult.error.message;
+    console.warn("JWT verification failed:", jwtVerificationResult.error.message);
+  } else {
+    jwtVerificationStatus.verified = true;
+    console.log("JWT verification successful");
+  }
+
+  // Decode JWT payload (whether verification succeeded or not)
+  const decodedPayload = await jose.decodeJwt(response);
+  
+  return {
+    ...decodedPayload,
+    _jwtVerification: jwtVerificationStatus
+  };
 };
 
 module.exports = {

@@ -729,6 +729,49 @@ export default function Sidenav({
                         <a className="px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                           {t("address")}: {address}
                         </a>
+                        <div className="px-4 py-2 flex items-center justify-center border-t border-gray-300">
+                          <div className="flex items-center space-x-2">
+                            {userInfo?._jwtVerification?.verified ? (
+                              <>
+                                <svg 
+                                  className="w-4 h-4 text-green-500" 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path 
+                                    strokeLinecap="round" 
+                                    strokeLinejoin="round" 
+                                    strokeWidth={2} 
+                                    d="M5 13l4 4L19 7" 
+                                  />
+                                </svg>
+                                <span className="text-green-600 text-xs font-medium">
+                                  JWT Verified
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                <svg 
+                                  className="w-4 h-4 text-red-500" 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path 
+                                    strokeLinecap="round" 
+                                    strokeLinejoin="round" 
+                                    strokeWidth={2} 
+                                    d="M6 18L18 6M6 6l12 12" 
+                                  />
+                                </svg>
+                                <span className="text-red-600 text-xs font-medium">
+                                  JWT Failed
+                                </span>
+                              </>
+                            )}
+                          </div>
+                        </div>
                         <button
                           className="w-full ltr:text-left rtl:text-right block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                           onClick={(e) => {
