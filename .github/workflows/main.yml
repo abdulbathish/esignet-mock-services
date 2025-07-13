@@ -1,3 +1,10 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - '**'    # runs on push to any branch
+
 jobs:
   build-push-docker:
     runs-on: ubuntu-latest
